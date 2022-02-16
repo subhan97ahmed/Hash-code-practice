@@ -1,9 +1,9 @@
 # author Void(subhan ahmed)
 
-file = open('input_data/a_an_example.in.txt', 'r')
+# file = open('input_data/a_an_example.in.txt', 'r')
 # file = open('input_data/b_basic.in.txt', 'r')
 # file = open('input_data/c_coarse.in.txt', 'r')
-# file = open('input_data/d_difficult.in.txt', 'r')
+file = open('input_data/d_difficult.in.txt', 'r')
 # file = open('input_data/e_elaborate.in.txt', 'r')
 lines = []
 # reading file
@@ -40,13 +40,12 @@ print("like items with score")
 print(likeIngredients)
 print("dislike items with score")
 print(dislikeIngredients)
-# todo do add those items which is not disliked by anyone to increase score
-# popping out the dislike Ingredients if it is more disliked than liked
+# removing those dislike Ingredients which are more disliked than liked
 resultIngredients = likeIngredients.copy()
 for key_of_dislikes in dislikeIngredients.keys():
     for key_of_likes in likeIngredients.keys():
         if key_of_likes == key_of_dislikes:
-            if likeIngredients[key_of_likes] <= dislikeIngredients[key_of_dislikes]:
+            if likeIngredients[key_of_likes] < dislikeIngredients[key_of_dislikes]:
                 resultIngredients.pop(key_of_likes)
 
 resultIngredients = list(resultIngredients.keys())
@@ -95,7 +94,6 @@ def sim_result_score(inputData, resultItems):
                     likeFlag = True
 
             # for dislikes
-            counter = 0
             if len(customer[n + 1]) == 0:
                 dislikeFlag = True
             else:
