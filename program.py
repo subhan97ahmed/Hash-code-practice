@@ -1,9 +1,9 @@
 # author Void(subhan ahmed)
 
-# file = open('input_data/a_an_example.in.txt', 'r')
+file = open('input_data/a_an_example.in.txt', 'r')
 # file = open('input_data/b_basic.in.txt', 'r')
 # file = open('input_data/c_coarse.in.txt', 'r')
-file = open('input_data/d_difficult.in.txt', 'r')
+# file = open('input_data/d_difficult.in.txt', 'r')
 # file = open('input_data/e_elaborate.in.txt', 'r')
 lines = []
 # reading file
@@ -62,7 +62,6 @@ outputFile.close()
 
 
 #  for scoring output file locally
-# todo method is not accurate with a lot of customers
 def sim_result_score(inputData, resultItems):
     noOfCustomers = inputData[0]
     customers = []
@@ -80,7 +79,6 @@ def sim_result_score(inputData, resultItems):
     # separating each result item
     resultItems = resultItems.split(" ")
     resultItems.pop(0)
-    # print(resultItems)
     score = 0
     for customer in customers:
         n = 0
@@ -102,12 +100,11 @@ def sim_result_score(inputData, resultItems):
                 dislikeFlag = True
             else:
                 for dislikeInfo in customer[n + 1]:
-
-                    for item in resultItems:
-                        if item == dislikeInfo:
-                            counter = counter + 1
-                    if counter == len(customer[n + 1]):
+                    if dislikeInfo not in resultItems:
                         dislikeFlag = True
+                    else:
+                        dislikeFlag = False
+                        break
             if likeFlag and dislikeFlag:
                 score = score + 1
             n = n + 2
